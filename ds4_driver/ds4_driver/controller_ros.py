@@ -5,13 +5,12 @@ from sensor_msgs.msg import Joy
 from sensor_msgs.msg import JoyFeedback
 from sensor_msgs.msg import JoyFeedbackArray
 from sensor_msgs.msg import Imu
-from ds4_driver.msg import Feedback
-from ds4_driver.msg import Report
-from ds4_driver.msg import Status
+from ds4_driver_msgs.msg import Feedback
+from ds4_driver_msgs.msg import Report
+from ds4_driver_msgs.msg import Status
 
 import copy
 import math
-
 
 class ControllerRos(Controller):
     def __init__(self, node):
@@ -346,9 +345,9 @@ class ControllerRos(Controller):
         msg.header = status.header
         msg.percentage = status.battery_percentage
         msg.voltage = Controller.MAX_VOLTAGE * msg.percentage
-        msg.current = float("NaN")
-        msg.charge = float("NaN")
-        msg.capacity = float("NaN")
+        msg.current = float(0)
+        msg.charge = float(0)
+        msg.capacity = float(0)
         msg.design_capacity = 1.0
         if not status.plug_usb:
             msg.power_supply_status = BatteryState.POWER_SUPPLY_STATUS_NOT_CHARGING
